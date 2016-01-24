@@ -36,17 +36,27 @@ static void main_window_load(Window *window) {
 
   s_time_layer1 = text_layer_create(GRect(0, 31, bounds.size.w, 32));
   s_time_layer2 = text_layer_create(GRect(0, 100, bounds.size.w, 32));
+
+// Create GBitmap
+s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_BACKGROUND);
+
+// Create BitmapLayer to display the GBitmap
+s_background_layer = bitmap_layer_create(bounds);
+
+// Set the bitmap onto the layer and add to the window
+bitmap_layer_set_bitmap(s_background_layer, s_background_bitmap);
+layer_add_child(window_layer, bitmap_layer_get_layer(s_background_layer));
 	
 
   // Improve the layout to be more like a watchface
-  text_layer_set_background_color(s_time_layer, GColorBlack);
+  text_layer_set_background_color(s_time_layer, GColorClear);
   text_layer_set_text_color(s_time_layer, GColorWhite);
   text_layer_set_text(s_time_layer, "00:00");
   text_layer_set_font(s_time_layer, fonts_get_system_font(FONT_KEY_LECO_32_BOLD_NUMBERS));
   text_layer_set_text_alignment(s_time_layer, GTextAlignmentCenter);
 
 
-  text_layer_set_background_color(s_time_layer1, GColorBlack);
+  text_layer_set_background_color(s_time_layer1, GColorClear);
   text_layer_set_text_color(s_time_layer1, GColorWhite);
   text_layer_set_text(s_time_layer1, "ਓ ਭੈਣਚੋਦ");
   //text_layer_set_font(s_time_layer, fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD));
@@ -54,7 +64,7 @@ static void main_window_load(Window *window) {
 			resource_get_handle(RESOURCE_ID_FONT_PRABHKI_32)));
   text_layer_set_text_alignment(s_time_layer1, GTextAlignmentCenter);
 
-  text_layer_set_background_color(s_time_layer2, GColorBlack);
+  text_layer_set_background_color(s_time_layer2, GColorClear);
   text_layer_set_text_color(s_time_layer2, GColorWhite);
   text_layer_set_text(s_time_layer2, "ਹੋਗੇ !!");
   //text_layer_set_font(s_time_layer, fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD));
@@ -67,15 +77,6 @@ static void main_window_load(Window *window) {
   layer_add_child(window_layer, text_layer_get_layer(s_time_layer1));
   layer_add_child(window_layer, text_layer_get_layer(s_time_layer2));
 
-// Create GBitmap
-s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_BACKGROUND);
-
-// Create BitmapLayer to display the GBitmap
-s_background_layer = bitmap_layer_create(bounds);
-
-// Set the bitmap onto the layer and add to the window
-bitmap_layer_set_bitmap(s_background_layer, s_background_bitmap);
-layer_add_child(window_layer, bitmap_layer_get_layer(s_background_layer));
 
 }
 
